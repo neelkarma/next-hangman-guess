@@ -1,6 +1,5 @@
 <script lang="ts">
   import { guessResult } from "./stores";
-  console.log($guessResult);
 </script>
 
 {#if $guessResult.display}

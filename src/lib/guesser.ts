@@ -33,8 +33,6 @@ export const guess = (
   wordList: string[]
 ): string => {
   // Validate inputs
-  console.log(hangmanInput);
-  console.log(wordList.length);
   if (!hangmanInput.includes("")) throw new AlreadySolvedError();
 
   const maxLenWord = wordList.reduce((highest, current) =>
@@ -57,7 +55,6 @@ export const guess = (
 
     return true;
   });
-  console.log(possibleWords);
 
   if (!possibleWords.length) throw new NoPossibleSolutionError();
 
@@ -70,7 +67,6 @@ export const guess = (
   // The algorithm
   let bestLength = Infinity;
   let bestChar = null;
-  console.log(unguessedChars);
 
   for (const char of unguessedChars) {
     // Assume that the word doesn't contain `char`, and see how many possible words it eliminates
