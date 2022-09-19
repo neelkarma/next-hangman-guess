@@ -6,7 +6,9 @@
   import ResultAlert from "./lib/ResultAlert.svelte";
 </script>
 
-<div class="p-3 md:mt-10 md:mx-auto md:max-w-[70%] flex flex-col gap-3">
+<div
+  class="p-3 md:mt-10 md:mx-auto md:max-w-[70%] lg:max-w-[50%] flex flex-col gap-3 md:gap-4"
+>
   <h1 class="text-xl md:text-3xl font-bold">Next Hangman Guess</h1>
   <HangmanInput />
   <div class="p-2 flex flex-col gap-1 rounded-lg border-gray-300 border-[1px]">
