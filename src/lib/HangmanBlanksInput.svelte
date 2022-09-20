@@ -9,7 +9,6 @@
   }>();
 
   const handleIncrement = () => {
-    if (value >= 10) return; // TODO: Make max limit max word length in word bank
     value += 1;
     dispatch("change", { value });
   };
