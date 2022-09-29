@@ -21,7 +21,7 @@ for better context):
 
 There are some limitations to this method.
 
-- It doesn't take into account the popularity of words.
+- It doesn't take into account the popularity of words. Therefore, any ties from step 3 of the above algorithm will be broken by alphabetic order, resulting in some... weird choices.
 - It doesn't work with words that aren't in the word bank.
 
 ## Acknowledgements
