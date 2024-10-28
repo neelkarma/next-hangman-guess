@@ -1,11 +1,9 @@
-import { setDiff, setUnion, zip } from "./utils";
-
 const ALPHABET = new Set("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
 export class InvalidLengthError extends Error {
   constructor() {
     super(
-      "Hangman Input Length exceeds that of the longest word in the word list"
+      "Hangman Input Length exceeds that of the longest word in the word list",
     );
     this.name = "InvalidLengthError";
   }
@@ -21,7 +19,7 @@ export class AlreadySolvedError extends Error {
 export class NoPossibleSolutionError extends Error {
   constructor() {
     super(
-      "No words are possible for this Hangman. Is the answer a valid English word?"
+      "No words are possible for this Hangman. Is the answer a valid English word?",
     );
     this.name = "NoPossibleSolutionError";
   }
@@ -30,13 +28,13 @@ export class NoPossibleSolutionError extends Error {
 export const guess = (
   hangmanInput: string[],
   incorrectGuesses: Set<string>,
-  wordList: string[]
-): string => {
+  wordList: string[],
+): string | null => {
   // Validate inputs
   if (!hangmanInput.includes("")) throw new AlreadySolvedError();
 
   const maxLenWord = wordList.reduce((highest, current) =>
-    current.length > highest.length ? current : highest
+    current.length > highest.length ? current : highest,
   );
   if (hangmanInput.length > maxLenWord.length) throw new InvalidLengthError();
 
@@ -44,13 +42,13 @@ export const guess = (
   const possibleWords = wordList.filter((word) => {
     if (word.length !== hangmanInput.length) return false;
 
-    for (const [wc, hc] of zip([[...word], hangmanInput])) {
-      if (hc === "") continue;
-      if (wc !== hc) return false;
-    }
+    for (let i = 0; i < hangmanInput.length; i++) {
+      const wordChar = word[i];
+      const hangmanChar = hangmanInput[i];
 
-    for (const char of word) {
-      if (incorrectGuesses.has(char)) return false;
+      if (hangmanChar === "") continue;
+      if (wordChar !== hangmanChar || incorrectGuesses.has(wordChar))
+        return false;
     }
 
     return true;
@@ -59,9 +57,8 @@ export const guess = (
   if (!possibleWords.length) throw new NoPossibleSolutionError();
 
   // Compute all unguessed characters
-  const unguessedChars = setDiff(
-    ALPHABET,
-    setUnion(new Set(hangmanInput.filter((c) => c !== "")), incorrectGuesses)
+  const unguessedChars = ALPHABET.difference(
+    incorrectGuesses.union(new Set(hangmanInput.filter((c) => c !== ""))),
   );
 
   // The algorithm
@@ -71,7 +68,7 @@ export const guess = (
   for (const char of unguessedChars) {
     // Assume that the word doesn't contain `char`, and see how many possible words it eliminates
     const potential = possibleWords.filter(
-      (word) => !word.includes(char)
+      (word) => !word.includes(char),
     ).length;
 
     // Guess the character that eliminates the most possible words
