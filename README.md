@@ -2,6 +2,18 @@
 
 > Web app that allows you to cheat at hangman.
 
+## How to use
+
+1. Use the `+` and `-` buttons to adjust the length of the word (number of blank
+   letters) you have to guess.
+2. Click the "Compute" button.
+3. Guess the letter that is shown.
+4. If the letter appears in the word, write the letter in the blanks
+   corresponding to where it appears in the word. Otherwise, add the letter to
+   the list of incorrect guesses.
+5. Repeat steps 2-4 until you have correctly guessed the word (or until
+   something breaks).
+
 ## Explanation
 
 This app uses the same method outlined in
@@ -21,7 +33,9 @@ for better context):
 
 There are some limitations to this method.
 
-- It doesn't take into account the popularity of words. Therefore, any ties from step 3 of the above algorithm will be broken by alphabetic order, resulting in some... weird choices.
+- It doesn't take into account the popularity of words. Therefore, any ties from
+  step 3 of the above algorithm will be broken by alphabetic order, resulting in
+  some... weird choices.
 - It doesn't work with words that aren't in the word bank.
 
 ## Acknowledgements
